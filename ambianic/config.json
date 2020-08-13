@@ -4,7 +4,7 @@
   "version": "1.6.0",
   "slug": "ambianic",
   "description": "Ambianic Edge AI",
-  "url": "https://github.com/dcmartin/addon-ambianic/blob/master/README.md",
+  "url": "https://github.com/dcmartin/addon-ambianic",
   "startup": "services",
   "boot": "auto",
   "arch": [
