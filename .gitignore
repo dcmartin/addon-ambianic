@@ -1,3 +1,4 @@
+build.*.out
 test.*.json
 test.*.out
 ambianic-edge
