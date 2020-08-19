@@ -95,13 +95,13 @@ push: build
 	@docker push ${DOCKER_TAG}
 
 latest:
-	@echo "${MC}>>> MAKE --" $$(date +%T) "-- making latest ${DOCKER_TAG}""${NC}" > /dev/stderr
+	@echo "${MC}>>> MAKE --" $$(date +%T) "-- making $@ ${DOCKER_TAG}""${NC}" > /dev/stderr
 	@docker tag ${DOCKER_TAG} $(DOCKER_REPOSITORY)/${BUILD_ARCH}-$(DOCKER_NAME):latest
 	@docker push $(DOCKER_REPOSITORY)/${BUILD_ARCH}-$(DOCKER_NAME):latest
 
 pull:
-	@echo "${MC}>>> MAKE --" $$(date +%T) "-- making latest ${DOCKER_TAG}""${NC}" > /dev/stderr
-	git pull
+	@echo "${MC}>>> MAKE --" $$(date +%T) "-- making $@ ${DOCKER_TAG}""${NC}" > /dev/stderr
+	@git pull
 
 
 ##
