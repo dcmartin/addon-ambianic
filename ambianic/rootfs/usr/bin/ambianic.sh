@@ -89,16 +89,19 @@ ambianic::update.ai_models.video()
   local edgetpu="${AMBIANIC_EDGE}/ai_models/${tflite}_edgetpu.tflite"
 
   tflite="${AMBIANIC_EDGE}/ai_models/${tflite}.tflite"
-
-  if [ -s "${tflite}" ] && [ -s "${edgetpu}" ]; then
+  if [ -s "${tflite}" ]; then
     echo "  ${name}:"
     echo '    model:'
     echo "      tflite: ${tflite}"
-    echo "      edgetpu: ${edgetpu}"
+
+    if [ -s "${edgetpu}" ]; then
+      echo "      edgetpu: ${edgetpu}"
+    else
+      bashio::log.warning "${FUNCNAME[0]}: model specified, but edgetpu no found; edgetpu: ${edgetpu:-}"
+    fi
 
     if [ "${labels:-null}" != 'null' ]; then
       labels="${AMBIANIC_EDGE}/ai_models/${labels}_labels.txt"
-
       if [ ! -s "${labels}" ]; then
         bashio::log.warning "${FUNCNAME[0]}: labels specified; NOT FOUND; path: ${labels}"
       else
@@ -106,11 +109,11 @@ ambianic::update.ai_models.video()
       fi
       echo "    labels: ${labels}"
     else
-      bashio::log.debug "${FUNCNAME[0]}: no labels specified"
+      bashio::log.warning "${FUNCNAME[0]}: no labels specified"
     fi
     echo '    top_k: '${top_k:-1}
   else
-    bashio::log.error "${FUNCNAME[0]}: model specified, but not found; tflite: ${tflite:-}; edgetpu: ${edgetpu:-}"
+    bashio::log.error "${FUNCNAME[0]}: model specified, but not found; tflite: ${tflite:-}"
   fi
 }
 
